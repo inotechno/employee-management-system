@@ -1,0 +1,3 @@
+ @isset($html)
+     {!! $html !!}
+ @endisset
