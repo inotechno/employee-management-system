@@ -1,0 +1,131 @@
+/*
+SQLyog Community v13.2.0 (64 bit)
+MySQL - 8.0.34-0ubuntu0.20.04.1 : Database - employee_system
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+USE `employee_system`;
+
+/*Data for the table `sites` */
+
+insert  into `sites`(`id`,`uid`,`name`,`longitude`,`latitude`,`foto`,`qr_code`,`created_at`,`updated_at`) values 
+(1,'jphyCdbGedxVsjN','Yayasan Pendidikan Tinggi Tarakanita (Jakarta )',NULL,NULL,NULL,'jphyCdbGedxVsjN.png','2023-07-26 10:27:59',NULL),
+(2,'l1T1q5E0txqjcAs','PT. Panen Lestari Internusa (Tunjungan Plaza- Surabaya)',NULL,NULL,NULL,'l1T1q5E0txqjcAs.png','2023-07-26 10:27:59',NULL),
+(3,'EJNxy0BocLRpb5t','Yayasan Pendidikan Tinggi Tarakanita (Jakarta )',NULL,NULL,NULL,'EJNxy0BocLRpb5t.png','2023-07-26 10:27:59',NULL),
+(4,'f1VioxLrNvLNmpL','Max Fashion - Pondok Indah Mall (Jakarta)',NULL,NULL,NULL,'f1VioxLrNvLNmpL.png','2023-07-26 10:27:59',NULL),
+(5,'iB7E7OB1ycmTWFD','Max Fashion - Central Park Mall (Jakarta)','106.7912536','-6.1771586',NULL,'iB7E7OB1ycmTWFD.png','2023-07-26 10:27:59',NULL),
+(6,'ZPQmcXaWDtTn1ID','Max Fashion - Lippo Mall Puri (Jakarta)',NULL,NULL,NULL,'ZPQmcXaWDtTn1ID.png','2023-07-26 10:27:59',NULL),
+(7,'U8ov2EE4gBsqqBS','Max Fashion - Lotte Shopping Avenue (Jakarta)',NULL,NULL,NULL,'U8ov2EE4gBsqqBS.png','2023-07-26 10:27:59',NULL),
+(8,'uZEhwpmM2SFlBCi','Baby Shop - Pondok Indah Mall (Jakarta)','106.9091532','-6.1560567',NULL,'uZEhwpmM2SFlBCi.png','2023-07-26 10:27:59',NULL),
+(9,'3pGQ2KfmZ4WuAvA','Baby Shop - Lippo Mall Puri (Jakarta)',NULL,NULL,NULL,'3pGQ2KfmZ4WuAvA.png','2023-07-26 10:27:59',NULL),
+(10,'WQDMuEZ735w4VJb','Baby Shop - Mall Kelapa Gading  (Jakarta)','106.9091532','-6.1560567',NULL,'WQDMuEZ735w4VJb.png','2023-07-26 10:27:59',NULL),
+(11,'m73eYT0JpcyDevC','Max Fashion - Aeon Mall Sentul (Bogor)',NULL,NULL,NULL,'m73eYT0JpcyDevC.png','2023-07-26 10:27:59',NULL),
+(12,'0cLbfMk8i43qboV','Max Fashion - Bintaro Jaya Xchange (Bintaro)',NULL,NULL,NULL,'0cLbfMk8i43qboV.png','2023-07-26 10:27:59',NULL),
+(13,'rfQ6FlqOAmslimC','Max Fashion - Aeon Mall BSD (BSD)',NULL,NULL,NULL,'rfQ6FlqOAmslimC.png','2023-07-26 10:27:59',NULL),
+(14,'9QR7N9GrwIyAscw','Max Fashion - Margocity Mall (Depok)',NULL,NULL,NULL,'9QR7N9GrwIyAscw.png','2023-07-26 10:27:59',NULL),
+(15,'os1YMRSd0ksYITz','Baby Shop - Margocity Mall (Depok)',NULL,NULL,NULL,'os1YMRSd0ksYITz.png','2023-07-26 10:27:59',NULL),
+(16,'aa4NdmDFCxB8ji9','Max Fashion - Grand Metropolitan Mall (Bekasi)','106.9849725','-6.2496006',NULL,'aa4NdmDFCxB8ji9.png','2023-07-26 10:27:59',NULL),
+(17,'uW1ipxqGlGEZcqn','PT. Pembangunan Jaya Ancol, Tbk',NULL,NULL,NULL,'uW1ipxqGlGEZcqn.png','2023-07-26 10:27:59',NULL),
+(18,'itxEjJNT5yqaDNL','PT. Bringin Karya Sejahtera',NULL,NULL,NULL,'itxEjJNT5yqaDNL.png','2023-07-26 10:27:59',NULL),
+(19,'oYMLnbG1OelCn4T','PT. Digital Analisis Tehnologi Andalan',NULL,NULL,NULL,'oYMLnbG1OelCn4T.png','2023-07-26 10:27:59',NULL),
+(20,'7Mlht24lXUYfWLa','PT. Mahkota Sentosa Utama',NULL,NULL,NULL,'7Mlht24lXUYfWLa.png','2023-07-26 10:27:59',NULL),
+(21,'0rOEQNTKcVJ9GNv','PT. Panen Lestari Internusa (Sogo Pakuwon Mall)',NULL,NULL,NULL,'0rOEQNTKcVJ9GNv.png','2023-07-26 10:27:59',NULL),
+(22,'PGcy1zybu8U0cUa','PT. Panen Lestari Internusa (Sogo Tunjungan Plaza)',NULL,NULL,NULL,'PGcy1zybu8U0cUa.png','2023-07-26 10:27:59',NULL),
+(23,'zJYfj717Hphy6cM','PT. Panen Lestari Internusa (Sogo Kota Kasablanka)',NULL,NULL,NULL,'zJYfj717Hphy6cM.png','2023-07-26 10:27:59',NULL),
+(24,'8xUSWTLtvYSmHIZ','PT. Panen Lestari Internusa (Sogo Galaxy Mall)',NULL,NULL,NULL,'8xUSWTLtvYSmHIZ.png','2023-07-26 10:27:59',NULL),
+(25,'VRAFemR9NzRlikx','PT. Panen Lestari Internusa (Sogo Pondok Indah Mall)',NULL,NULL,NULL,'VRAFemR9NzRlikx.png','2023-07-26 10:27:59',NULL),
+(26,'t4iiR7TIdVzjyUP','PT. Panen Lestari Internusa (Sogo Central Park)','106.7900338','-6.1786263',NULL,'t4iiR7TIdVzjyUP.png','2023-07-26 10:27:59',NULL),
+(27,'WxnQ5mnB0dknmdQ','PT. Panen Lestari Internusa (Sogo Plaza Senayan)',NULL,NULL,NULL,'WxnQ5mnB0dknmdQ.png','2023-07-26 10:27:59',NULL),
+(28,'RhQ7Ge40xPaXFEt','PT. Panen Lestari Internusa (Sogo Mall Kelapa Gading)','106.907919','-6.1561195',NULL,'RhQ7Ge40xPaXFEt.png','2023-07-26 10:27:59','2023-08-16 10:50:20'),
+(29,'s6xujkfQEFeoKwT','PT. Panen GL Indonesia (Galeries Lafayette)',NULL,NULL,NULL,'s6xujkfQEFeoKwT.png','2023-07-26 10:27:59',NULL),
+(30,'GD6scnfMQhZUoZI','PT. Panen Selaras Intibuana (Seibu Grand Indonesia)','106.8196395','-6.1955341',NULL,'GD6scnfMQhZUoZI.png','2023-07-26 10:27:59',NULL),
+(31,'xKJfusgPYYY7pzx','PT. Panen Selaras Intibuana (Seibu Pondok Indah Mall)',NULL,NULL,NULL,'xKJfusgPYYY7pzx.png','2023-07-26 10:27:59',NULL),
+(32,'BPXlhcili2j51Mn','PT. Swalayan Sukses Abadi (Foodhall FX Sudirman)',NULL,NULL,NULL,'BPXlhcili2j51Mn.png','2023-07-26 10:27:59',NULL),
+(33,'Fxrh6yWQcZ5nMpK','PT. Swalayan Sukses Abadi (Foodhall Neo Soho)','106.7897242','-6.1748974',NULL,'Fxrh6yWQcZ5nMpK.png','2023-07-26 10:27:59',NULL),
+(34,'hOTxXkq93hHHyqN','PT. Swalayan Sukses Abadi (Foodhall Mall Kelapa Gading)',NULL,NULL,NULL,'hOTxXkq93hHHyqN.png','2023-07-26 10:27:59',NULL),
+(35,'Dq6wbQi9xxRc2NI','PT. Swalayan Sukses Abadi (Foodhall Sunter Mall)','106.8714157','-6.1382004',NULL,'Dq6wbQi9xxRc2NI.png','2023-07-26 10:27:59',NULL),
+(36,'C9rtIZkVvxF65hr','PT. Swalayan Sukses Abadi (Foodhall Grand Indonesia)','106.819571','-6.1957467',NULL,'C9rtIZkVvxF65hr.png','2023-07-26 10:27:59',NULL),
+(37,'UMR8Cz7J12DZIH6','PT. Swalayan Sukses Abadi (Foodhall Senayan City)',NULL,NULL,NULL,'UMR8Cz7J12DZIH6.png','2023-07-26 10:27:59',NULL),
+(38,'mgGTcJSQj1ylHo6','PT. Swalayan Sukses Abadi (Foodhall Pondok Indah Mall)',NULL,NULL,NULL,'mgGTcJSQj1ylHo6.png','2023-07-26 10:27:59',NULL),
+(39,'n3iwOXHR4vTKSNp','PT. Swalayan Sukses Abadi (Daily Foodhall Kemayoran)',NULL,NULL,NULL,'n3iwOXHR4vTKSNp.png','2023-07-26 10:27:59',NULL),
+(40,'6BKw0LvlQzGxxxP','PT. Swalayan Sukses Abadi (Daily Foodhall Pamulang)',NULL,NULL,NULL,'6BKw0LvlQzGxxxP.png','2023-07-26 10:27:59',NULL),
+(41,'0mVGoAMBqRqhUCf','PT. Jakarta Inti Land (JIL Karawang)','107.3072542','-6.3094273',NULL,'0mVGoAMBqRqhUCf.png','2023-07-26 10:27:59','2023-08-07 17:28:52'),
+(42,'tx7Bwgbu3LGOq3f','PT. Jakarta Inti Land ( JIL Lampung)',NULL,NULL,NULL,'tx7Bwgbu3LGOq3f.png','2023-07-26 10:27:59',NULL),
+(43,'AEok603jBAVWMDj','PT. Jakarta Inti Land ( Jil Kediri)',NULL,NULL,NULL,'AEok603jBAVWMDj.png','2023-07-26 10:27:59',NULL),
+(44,'H2VX6BAnum0qrOw','PT. Jakarta Inti Land (JIL Cirebon)',NULL,NULL,NULL,'H2VX6BAnum0qrOw.png','2023-07-26 10:27:59',NULL),
+(45,'9ExAWwTwGfhKKxc','PT. Logamindo Sarimulia (Sidoarjo)',NULL,NULL,NULL,'9ExAWwTwGfhKKxc.png','2023-07-26 10:27:59',NULL),
+(46,'yqkKYzRMLFP5UMK','PT. Sarana Maju Lestari (Jakarta)',NULL,NULL,NULL,'yqkKYzRMLFP5UMK.png','2023-07-26 10:27:59',NULL),
+(47,'CblLz8l3JXS5H0m','Yayasan Tarakanita (SD, SMP dan SMA)','106.8121346','-6.2465154',NULL,'CblLz8l3JXS5H0m.png','2023-07-26 10:27:59','2023-08-02 09:07:30'),
+(48,'oBkf452YspTQKnC','PT. Eka Mas Republik (My Republik)',NULL,NULL,NULL,'oBkf452YspTQKnC.png','2023-07-26 10:27:59',NULL),
+(49,'Fw0gQyawS8RSGtJ','PT. Pakarti Yoga (Jakarta)',NULL,NULL,NULL,'Fw0gQyawS8RSGtJ.png','2023-07-26 10:27:59',NULL),
+(50,'n6ManpRWE1QiBpn','PT. Pakarti Yoga - Rawamaja (Jakarta)',NULL,NULL,NULL,'n6ManpRWE1QiBpn.png','2023-07-26 10:27:59',NULL),
+(51,'20PKWc8zsMnxxW1','PT. Pakarti Jaya (Jakarta)','106.8165056','-6.1771573',NULL,'20PKWc8zsMnxxW1.png','2023-07-26 10:27:59',NULL),
+(52,'Kxh80MSJivEkd8n','PT. Pakarti Jaya - Cikarang','107.1584752','-6.3719252',NULL,'Kxh80MSJivEkd8n.png','2023-07-26 10:27:59','2023-08-07 17:29:16'),
+(53,'pAFOvbk5Mao62q0','PT. Asean Motor International','106.8292646','-6.1622672',NULL,'pAFOvbk5Mao62q0.png','2023-07-26 10:27:59','2023-08-21 10:17:40'),
+(54,'vCMFNzF37wUzkB2','PT. Panen Wangi Abadi (Sephora Pondok Indah Mall)',NULL,NULL,NULL,'vCMFNzF37wUzkB2.png','2023-07-26 10:27:59',NULL),
+(55,'orJNM8S9eOwJZyy','PT. Panen Wangi Abadi (Sephora Senayan City)',NULL,NULL,NULL,'orJNM8S9eOwJZyy.png','2023-07-26 10:27:59',NULL),
+(56,'yWg5xHH1DvMmfgY','PT. Panen Wangi Abadi (Sephora Central Park)','106.7914861','-6.1774172',NULL,'yWg5xHH1DvMmfgY.png','2023-07-26 10:27:59',NULL),
+(57,'ByfTIwsgY03kXX2','PT. Panen Wangi Abadi (Sephora Grand Indonesia)','106.819604','-6.1948795',NULL,'ByfTIwsgY03kXX2.png','2023-07-26 10:27:59',NULL),
+(58,'PvpyfZtC6Z2IBOl','PT. Panen Wangi Abadi (Sephora Gandaria City)',NULL,NULL,NULL,'PvpyfZtC6Z2IBOl.png','2023-07-26 10:27:59',NULL),
+(59,'CE2vJiGXZmMETpi','PT. Panen Wangi Abadi (Sephora Kota Kasablanka)',NULL,NULL,NULL,'CE2vJiGXZmMETpi.png','2023-07-26 10:27:59',NULL),
+(60,'4Fsc2Bhdlm2AvOY','PT. Panen Wangi Abadi (Sephora Plaza Senayan)',NULL,NULL,NULL,'4Fsc2Bhdlm2AvOY.png','2023-07-26 10:27:59',NULL),
+(61,'xKRCyOwS3qJP7rt','PT. Panen Wangi Abadi (Sephora Mall Kelapa Gading)','106.9088789','-6.1567795',NULL,'xKRCyOwS3qJP7rt.png','2023-07-26 10:27:59',NULL),
+(62,'M2mqn3FW5o740MW','PT. Panen Wangi Abadi (Sephora Delipark Medan)',NULL,NULL,NULL,'M2mqn3FW5o740MW.png','2023-07-26 10:27:59',NULL),
+(63,'RXvmVHcRu1JJYvK','PT. Bersama Karunia Mandiri (Berskha Grand Indonesia)','106.8204912','-6.1952663',NULL,'RXvmVHcRu1JJYvK.png','2023-07-26 10:27:59',NULL),
+(64,'oZzxrkqY0QY8kzw','PT. Mitra Selaras Sempurna Ritel (Marks & Spencer Grand Indonesia)','106.9084603','-6.156642',NULL,'oZzxrkqY0QY8kzw.png','2023-07-26 10:27:59',NULL),
+(65,'l7by69eO9OJITgp','PT. Mitra Selaras Sempurna Ritel (Marks & Spencer Plaza Senayan)',NULL,NULL,NULL,'l7by69eO9OJITgp.png','2023-07-26 10:27:59',NULL),
+(66,'gQBf5g5mgaQj1Ox','PT. Sarimode Fashindo Adiperkasa Ritel (Zara Plaza Senayan)',NULL,NULL,NULL,'gQBf5g5mgaQj1Ox.png','2023-07-26 10:27:59',NULL),
+(67,'Hto2qRdnxODm46f','PT. Kinokunia Pustaka Indonesia (Kinokuniya Grand Indonesia)','106.8197858','-6.1951667',NULL,'Hto2qRdnxODm46f.png','2023-07-26 10:27:59',NULL),
+(68,'AlbowmXfXJpa51c','PT. Mitsubishi Electric Automotive Indonesia (Cikarang)','107.1340363','-6.3412607',NULL,'AlbowmXfXJpa51c.png','2023-07-26 10:27:59',NULL),
+(69,'8WiaUOGlXx0y2PT','Unaids Office Jakarta',NULL,NULL,NULL,'8WiaUOGlXx0y2PT.png','2023-07-26 10:27:59',NULL),
+(70,'vghgeVimB77KzUc','PT. Hema Medhajaya (Tangerang)','106.537405','-6.2154878',NULL,'vghgeVimB77KzUc.png','2023-07-26 10:27:59','2023-08-07 17:27:29'),
+(71,'wk7yImfzekUkXXd','PT. Alter Abadi (Belitung)',NULL,NULL,NULL,'wk7yImfzekUkXXd.png','2023-07-26 10:27:59',NULL),
+(72,'4XmED4mmFxLHfEF','PT. Asia Putra Perkasa (Jakarta)','107.1394803','-6.3006794',NULL,'4XmED4mmFxLHfEF.png','2023-07-26 10:27:59',NULL),
+(73,'u5lSigqkSC494O5','Green Montesorri School (Jakarta)',NULL,NULL,NULL,'u5lSigqkSC494O5.png','2023-07-26 10:27:59',NULL),
+(74,'h9xjCHifR0wVp94','PT. Abhimata Citra Abadi',NULL,NULL,NULL,'h9xjCHifR0wVp94.png','2023-07-26 10:27:59',NULL),
+(75,'sOmydd0TLTFe6CK','PT. Bollore Logistics Indonesia','106.6847751','-6.1056098',NULL,'sOmydd0TLTFe6CK.png','2023-07-26 10:27:59','2023-08-07 17:27:51'),
+(76,'LP0fJi4lUgjStNy','PT. Smartfren',NULL,NULL,NULL,'LP0fJi4lUgjStNy.png','2023-07-26 10:27:59',NULL),
+(77,'r3ZSaA5pWgWupwK','Gudang Batam',NULL,NULL,NULL,'r3ZSaA5pWgWupwK.png','2023-07-26 10:27:59',NULL),
+(78,'dq4FhmC9qwam5pt','Gudang Medan','98.56419','3.60209',NULL,'dq4FhmC9qwam5pt.png','2023-07-26 10:27:59',NULL),
+(79,'aC4x5hA3wnAKRKf','Gudang Pekanbaru','101.39718','0.53255',NULL,'aC4x5hA3wnAKRKf.png','2023-07-26 10:27:59',NULL),
+(80,'51x15VjegOFu6wA','Gudang Palembang',NULL,NULL,NULL,'51x15VjegOFu6wA.png','2023-07-26 10:27:59',NULL),
+(81,'sOMbSKiBDPhBWen','Gudang Surabaya',NULL,NULL,NULL,'sOMbSKiBDPhBWen.png','2023-07-26 10:27:59',NULL),
+(82,'JFtPXaMSNjw5wJw','Gudang Manis',NULL,NULL,NULL,'JFtPXaMSNjw5wJw.png','2023-07-26 10:27:59',NULL),
+(83,'JIQ4tuUEQQxm5ec','Gudang Gunung Sahari',NULL,NULL,NULL,'JIQ4tuUEQQxm5ec.png','2023-07-26 10:27:59',NULL),
+(84,'DNevn0QTWnkLiFW','Head Office TPM Group','106.7988188','-6.2631156',NULL,'DNevn0QTWnkLiFW.png','2023-07-26 10:27:59',NULL),
+(85,'ZoGn6Xr7Eqy5Mdi','Branch Office Surabaya',NULL,NULL,NULL,'ZoGn6Xr7Eqy5Mdi.png','2023-07-26 10:27:59',NULL),
+(86,'n20jTk4uE4rOZuI','Centra Grand Indonesia','106.8219422','-6.1961218',NULL,'n20jTk4uE4rOZuI.png','2023-08-01 10:37:00','2023-08-01 10:37:00'),
+(87,'VcD1yQ8XazRR1nO','Taman Kebon Sirih',NULL,NULL,NULL,'VcD1yQ8XazRR1nO.png','2023-08-01 10:38:08','2023-08-01 10:38:08'),
+(88,'wiOuvISuDlmrNYE','Hema Panongan Pusat',NULL,NULL,NULL,'wiOuvISuDlmrNYE.png','2023-08-01 10:38:48','2023-08-01 10:38:48'),
+(89,'X12da63gRiyQUBu','Hema Ranca Iyuh Pabrik',NULL,NULL,NULL,'X12da63gRiyQUBu.png','2023-08-01 10:39:10','2023-08-01 10:39:20'),
+(90,'ey6wSmczip3oOYy','Bollore LV',NULL,NULL,NULL,'ey6wSmczip3oOYy.png','2023-08-01 10:40:04','2023-08-01 10:40:04'),
+(91,'ojklbrseaTeeXr7','Bollore E8',NULL,NULL,NULL,'ojklbrseaTeeXr7.png','2023-08-01 10:40:12','2023-08-01 10:40:12'),
+(92,'dcBD0GrZyq6l1wM','TB Simatupang Kavling 8',NULL,NULL,NULL,'dcBD0GrZyq6l1wM.png','2023-08-01 10:40:29','2023-08-01 10:40:29'),
+(93,'ogFUJvlKhkPOE0j','KPP PMA','106.8537278','-6.2541216',NULL,'ogFUJvlKhkPOE0j.png','2023-08-01 10:40:39','2023-08-21 10:15:35'),
+(94,'ZnBsyOvKQpM74zS','SML Technologies - Mampang',NULL,NULL,NULL,'ZnBsyOvKQpM74zS.png','2023-08-01 16:48:02','2023-08-01 16:48:02'),
+(95,'pr9DJ5CUBtJludg','PT. Pakarti Yoga 96',NULL,NULL,NULL,'pr9DJ5CUBtJludg.png','2023-08-10 10:09:34','2023-08-10 10:09:34'),
+(96,'CaRvvncpTvUWRFZ','SOGO PAKUWON MALL (Jawa Timur)',NULL,NULL,NULL,'CaRvvncpTvUWRFZ.png','2023-08-21 15:53:24','2023-08-21 15:53:24'),
+(97,'KzUj5fy1uPRxiQI','SOGO TUNJUNGAN PLAZA (Jawa Timur)',NULL,NULL,NULL,'KzUj5fy1uPRxiQI.png','2023-08-21 15:53:38','2023-08-21 15:53:38'),
+(98,'8DOM3TdZ91FphUp','SOGO GALAXY MALL (Jawa Timur)',NULL,NULL,NULL,'8DOM3TdZ91FphUp.png','2023-08-21 15:53:59','2023-08-21 15:53:59'),
+(99,'5utmaBYpqijCYr1','SEPHORA PAKUWON (Jawa Timur)',NULL,NULL,NULL,'5utmaBYpqijCYr1.png','2023-08-21 15:54:22','2023-08-21 15:54:22'),
+(100,'YLl0U4zW583bGZR','SEPHORA TUNJUNGAN PLAZA (Jawa Timur)',NULL,NULL,NULL,'YLl0U4zW583bGZR.png','2023-08-21 15:54:35','2023-08-21 15:54:35'),
+(101,'sHS5u2yTwAC3Btu','ZARA PAKUWON MALL (Jawa Timur)',NULL,NULL,NULL,'sHS5u2yTwAC3Btu.png','2023-08-21 15:54:52','2023-08-21 15:54:52'),
+(102,'VcpElIPR0fhsuWE','ZARA TUNJUNGAN PLAZA (Jawa Timur)',NULL,NULL,NULL,'VcpElIPR0fhsuWE.png','2023-08-21 15:55:05','2023-08-21 15:55:05'),
+(103,'5YKP4AvExjA79vb','BRIKS SURABAYA (Jawa Timur)',NULL,NULL,NULL,'5YKP4AvExjA79vb.png','2023-08-21 15:55:31','2023-08-21 15:55:31'),
+(104,'Piy2F8ZjKHrSBTP','MINI SOCCER BRI (Jawa Timur)',NULL,NULL,NULL,'Piy2F8ZjKHrSBTP.png','2023-08-21 15:55:46','2023-08-21 15:55:46'),
+(105,'UQL7LbAtzfwHx3j','LOGAMINDO SIDOARJO (Jawa Timur)',NULL,NULL,NULL,'UQL7LbAtzfwHx3j.png','2023-08-21 15:56:00','2023-08-21 15:56:00'),
+(106,'mMokkD9doDEajaa','BOLLORE LOGISTIK SURABAYA (Jawa Timur)',NULL,NULL,NULL,'mMokkD9doDEajaa.png','2023-08-21 15:56:32','2023-08-21 15:56:32'),
+(107,'Ekx2wYCyIgKGzXt','KTL Kamajaya Trilaksana - Jakarta','106.8199562','-6.183717',NULL,'Ekx2wYCyIgKGzXt.png','2023-08-22 11:33:22','2023-08-23 17:09:51');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
