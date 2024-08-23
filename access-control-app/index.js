@@ -214,7 +214,6 @@ app.post("/access-control", upload.any(), async (req, res) => {
 const host = "192.168.20.165";
 const port = 3000;
 
-
 // Mulai server
 app.listen(port, host, () => {
     console.log("Server started at http://" + host + ":" + port);

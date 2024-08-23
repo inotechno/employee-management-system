@@ -7301,3 +7301,54 @@ Stack trace: Error: You have an error in your SQL syntax; check the manual that 
 2024-08-23T09:05:36.143Z info: Attendance created: Attendance ID 200267 for UID 10867 Employee ID 20221225
 2024-08-23T09:05:36.361Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:05:35 IpAddress: 192.168.20.201
 2024-08-23T09:05:41.055Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:05:40 IpAddress: 192.168.20.201
+2024-08-23T09:08:29.322Z info: Attendance created: Attendance ID 200268 for UID 10870 Employee ID 20221214
+2024-08-23T09:08:29.566Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:08:28 IpAddress: 192.168.20.201
+2024-08-23T09:08:34.125Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:08:33 IpAddress: 192.168.20.201
+2024-08-23T09:13:07.388Z info: Attendance created: Attendance ID 200269 for UID 10873 Employee ID 20221234
+2024-08-23T09:13:07.751Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:13:06 IpAddress: 192.168.20.201
+2024-08-23T09:13:12.496Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:13:11 IpAddress: 192.168.20.201
+2024-08-23T09:15:47.159Z info: Attendance created: Attendance ID 200270 for UID 9290 Employee ID 20240502
+2024-08-23T09:15:47.422Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:15:46 IpAddress: 192.168.20.202
+2024-08-23T09:15:52.096Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:15:51 IpAddress: 192.168.20.202
+2024-08-23T09:16:47.300Z info: Attendance created: Attendance ID 200271 for UID 10876 Employee ID 20221204
+2024-08-23T09:16:47.658Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:16:46 IpAddress: 192.168.20.201
+2024-08-23T09:16:52.213Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:16:51 IpAddress: 192.168.20.201
+2024-08-23T09:17:08.986Z info: Attendance created: Attendance ID 200272 for UID 9293 Employee ID 20230902
+2024-08-23T09:17:09.224Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:17:08 IpAddress: 192.168.20.202
+2024-08-23T09:17:13.907Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:17:13 IpAddress: 192.168.20.202
+2024-08-23T09:17:18.095Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:17:17 IpAddress: 192.168.20.202
+2024-08-23T09:18:06.278Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:18:06 IpAddress: 192.168.20.201
+2024-08-23T09:19:08.032Z info: Attendance created: Attendance ID 200273 for UID 9297 Employee ID 20221229
+2024-08-23T09:19:08.306Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:19:06 IpAddress: 192.168.20.202
+2024-08-23T09:19:13.056Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:19:11 IpAddress: 192.168.20.202
+2024-08-23T09:19:40.653Z info: Attendance created: Attendance ID 200274 for UID 10880 Employee ID 20240502
+2024-08-23T09:19:41.066Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:19:40 IpAddress: 192.168.20.201
+2024-08-23T09:19:45.636Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:19:45 IpAddress: 192.168.20.201
+2024-08-23T09:19:55.575Z info: Attendance created: Attendance ID 200275 for UID 9300 Employee ID 20221204
+2024-08-23T09:19:59.083Z info: Attendance created: Attendance ID 200276 for UID 9301 Employee ID 20221204
+2024-08-23T09:20:02.642Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:20:01 IpAddress: 192.168.20.202
+2024-08-23T09:20:03.576Z info: Attendance created: Attendance ID 200277 for UID 9303 Employee ID 20221204
+2024-08-23T09:20:03.797Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:20:02 IpAddress: 192.168.20.202
+2024-08-23T09:20:07.461Z info: Attendance created: Attendance ID 200278 for UID 9305 Employee ID 20221204
+2024-08-23T09:20:11.626Z info: Attendance created: Attendance ID 200279 for UID 9306 Employee ID 20221204
+2024-08-23T09:20:16.568Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:20:15 IpAddress: 192.168.20.202
+2024-08-23T09:24:40.816Z info: Attendance created: Attendance ID 200280 for UID 10883 Employee ID 20221235
+2024-08-23T09:24:41.034Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:24:40 IpAddress: 192.168.20.201
+2024-08-23T09:24:45.677Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:24:45 IpAddress: 192.168.20.201
+2024-08-23T09:29:07.826Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:29:06 IpAddress: 192.168.20.202
+2024-08-23T09:29:10.668Z info: Attendance created: Attendance ID 200281 for UID 9309 Employee ID 20221235
+2024-08-23T09:29:10.981Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:29:09 IpAddress: 192.168.20.202
+2024-08-23T09:29:15.643Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:29:14 IpAddress: 192.168.20.202
+2024-08-23T09:31:54.195Z info: Attendance created: Attendance ID 200282 for UID 10886 Employee ID 20221204
+2024-08-23T09:31:54.494Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:31:53 IpAddress: 192.168.20.201
+2024-08-23T09:31:59.038Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:31:58 IpAddress: 192.168.20.201
+2024-08-23T09:38:34.028Z info: Attendance created: Attendance ID 200283 for UID 9312 Employee ID 20221234
+2024-08-23T09:38:34.243Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:38:32 IpAddress: 192.168.20.202
+2024-08-23T09:38:38.880Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:38:37 IpAddress: 192.168.20.202
+2024-08-23T09:43:06.190Z info: Attendance created: Attendance ID 200284 for UID 9315 Employee ID 20221204
+2024-08-23T09:43:06.611Z info: Attendance created: Attendance ID 200285 for UID 9316 Employee ID 20221204
+2024-08-23T09:43:06.863Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:43:05 IpAddress: 192.168.20.202
+2024-08-23T09:43:11.515Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:43:10 IpAddress: 192.168.20.202
+2024-08-23T09:47:01.199Z info: Attendance created: Attendance ID 200286 for UID 10889 Employee ID 20221234
+2024-08-23T09:47:01.485Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:47:00 IpAddress: 192.168.20.201
+2024-08-23T09:47:06.067Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:47:05 IpAddress: 192.168.20.201
