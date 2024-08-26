@@ -150,7 +150,7 @@ eventEmitter.on("receivedLog", async (parsedEventLog) => {
                     machine.id,
                     timestamp,
                     1,
-                    1,
+                    4,
                     siteId,
                     siteLongitude,
                     siteLatitude,
