@@ -86,7 +86,7 @@ eventEmitter.on("receivedLog", async (parsedEventLog) => {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             const result = await queryAsync(
-                "INSERT INTO users (username, name, email, password) VALUES (?, ?, ?, ?, ?, ?)",
+                "INSERT INTO users (username, name, email, password) VALUES (?, ?, ?, ?)",
                 [
                     employeeNoString,
                     eventData.name || null,
@@ -143,7 +143,7 @@ eventEmitter.on("receivedLog", async (parsedEventLog) => {
         const attendance = attendanceResults[0];
         if (!attendance) {
             const result = await queryAsync(
-                "INSERT INTO attendances (uid, employee_id, state, timestamp, type, event_id, site_id, longitude, latitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO attendances (uid, employee_id, state, timestamp, type, event_id, site_id, longitude, latitude, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 [
                     eventData.serialNo + codeIp + machine.id,
                     employeeId,
@@ -154,6 +154,7 @@ eventEmitter.on("receivedLog", async (parsedEventLog) => {
                     siteId,
                     siteLongitude,
                     siteLatitude,
+                    new Date(),
                 ]
             );
             logger.info(
@@ -211,7 +212,7 @@ app.post("/access-control", upload.any(), async (req, res) => {
     }
 });
 
-const host = "192.168.20.165";
+const host = "127.0.0.1";
 const port = 3000;
 
 // Mulai server

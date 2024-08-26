@@ -9,6 +9,7 @@
 /public/EMS TPM.apk
 /Dokumen Pendukung
 /vendor
+/access-control-app/*
 .env
 .env.backup
 .phpunit.result.cache
