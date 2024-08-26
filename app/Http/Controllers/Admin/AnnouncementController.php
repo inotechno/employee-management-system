@@ -87,9 +87,11 @@ class AnnouncementController extends Controller
                     $input['email'] = $value->user->email;
                     $input['name'] = $value->user->name;
 
-                    Mail::send('email.send_announcement', $input, function ($message) use ($input) {
-                        $message->to($input['email'], $input['name'])->subject($input['subject']);
-                    });
+                    SendMailAnnouncement::dispatch($input);
+                    
+                    // Mail::send('email.send_announcement', $input, function ($message) use ($input) {
+                    //     $message->to($input['email'], $input['name'])->subject($input['subject']);
+                    // });
 
                     $succes[] = [
                         'type' => 'success',
