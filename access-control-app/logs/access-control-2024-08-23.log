@@ -7352,3 +7352,27 @@ Stack trace: Error: You have an error in your SQL syntax; check the manual that 
 2024-08-23T09:47:01.199Z info: Attendance created: Attendance ID 200286 for UID 10889 Employee ID 20221234
 2024-08-23T09:47:01.485Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:47:00 IpAddress: 192.168.20.201
 2024-08-23T09:47:06.067Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:47:05 IpAddress: 192.168.20.201
+2024-08-23T09:58:32.361Z info: Attendance created: Attendance ID 200287 for UID 10892 Employee ID 20221204
+2024-08-23T09:58:32.614Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:58:31 IpAddress: 192.168.20.201
+2024-08-23T09:58:37.249Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:58:36 IpAddress: 192.168.20.201
+2024-08-23T09:59:56.838Z info: Attendance created: Attendance ID 200288 for UID 9319 Employee ID 20221204
+2024-08-23T09:59:57.042Z error: Invalid employeeNoString, timestamp: 2024-08-23 16:59:55 IpAddress: 192.168.20.202
+2024-08-23T10:00:01.796Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:00:00 IpAddress: 192.168.20.202
+2024-08-23T10:03:57.120Z info: Attendance created: Attendance ID 200289 for UID 10895 Employee ID 20221235
+2024-08-23T10:03:57.469Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:03:56 IpAddress: 192.168.20.201
+2024-08-23T10:04:02.118Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:04:01 IpAddress: 192.168.20.201
+2024-08-23T10:04:40.866Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:04:39 IpAddress: 192.168.20.202
+2024-08-23T10:04:41.389Z info: Attendance created: Attendance ID 200290 for UID 9323 Employee ID 20221235
+2024-08-23T10:04:41.768Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:04:40 IpAddress: 192.168.20.202
+2024-08-23T10:04:46.400Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:04:45 IpAddress: 192.168.20.202
+2024-08-23T10:09:02.222Z info: Attendance created: Attendance ID 200291 for UID 9326 Employee ID 20221209
+2024-08-23T10:09:02.754Z info: Attendance created: Attendance ID 200292 for UID 9327 Employee ID 20221209
+2024-08-23T10:09:02.980Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:09:01 IpAddress: 192.168.20.202
+2024-08-23T10:09:07.667Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:09:06 IpAddress: 192.168.20.202
+2024-08-23T10:10:25.836Z info: Attendance created: Attendance ID 200293 for UID 10898 Employee ID 20221204
+2024-08-23T10:10:26.235Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:10:25 IpAddress: 192.168.20.201
+2024-08-23T10:10:30.773Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:10:30 IpAddress: 192.168.20.201
+2024-08-23T10:10:45.573Z info: Attendance created: Attendance ID 200294 for UID 9330 Employee ID 20221204
+2024-08-23T10:10:46.109Z info: Attendance created: Attendance ID 200295 for UID 9331 Employee ID 20221204
+2024-08-23T10:10:46.312Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:10:44 IpAddress: 192.168.20.202
+2024-08-23T10:10:51.083Z error: Invalid employeeNoString, timestamp: 2024-08-23 17:10:49 IpAddress: 192.168.20.202
