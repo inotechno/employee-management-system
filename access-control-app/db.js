@@ -3,9 +3,9 @@ import mysql from 'mysql2';
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'ems'
+  user: 'employee_system',
+  password: '@Experience26',
+  database: 'employee_system'
 });
 
 connection.connect((err) => {
