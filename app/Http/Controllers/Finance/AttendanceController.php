@@ -55,7 +55,7 @@ class AttendanceController extends Controller
                     $config_masuk = ConfigAttendance::find(1);
                     // $config_pulang = ConfigAttendance::find(2);
 
-                    $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->oldest()->first();
+                    $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereTime('timestamp', '>=', $config_masuk->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->oldest()->first();
                     // $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
 
                     if ($in) {
@@ -124,7 +124,7 @@ class AttendanceController extends Controller
                     $config_pulang = ConfigAttendance::find(2);
 
                     // $out = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->oldest()->first();
-                    $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
+                    $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereTime('timestamp', '<=', $config_pulang->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
 
                     if ($out) {
                         $span = '';
