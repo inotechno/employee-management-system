@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Exports\ReportExport;
 use App\Helpers\SelisihHariCuti;
 use App\Models\Absent;
+use App\Models\ConfigAttendance;
 use App\Models\DailyReport;
 use App\Models\PaidLeave;
 use App\Models\Submission;
@@ -212,7 +213,7 @@ class ReportController extends Controller
             $tbody .= ' <tr>
                             <td>' . $absent->employee_id . '</td>
                             <td>' . $absent->employee->user->name . '</td>
-                            <td>' . $date .  '</td>
+                            <td>' . $date . '</td>
                             <td>' . $absent->description . '</td>
                             <td>' . $validation_at . '</td>
                             <td>' . $absent->validation_user->name . '</td>
@@ -270,7 +271,7 @@ class ReportController extends Controller
             $tbody .= ' <tr>
                             <td>' . $absent->employee_id . '</td>
                             <td>' . $absent->employee->user->name . '</td>
-                            <td>' . $date .  '</td>
+                            <td>' . $date . '</td>
                             <td>' . $absent->description . '</td>
                             <td>' . $validation_at . '</td>
                             <td>' . $absent->validation_user->name . '</td>
@@ -298,6 +299,15 @@ class ReportController extends Controller
 
         $startDate = strtotime($request->periode_start);
         $endDate = strtotime($request->periode_end);
+
+        $config_masuk = ConfigAttendance::find(1);
+        $config_pulang = ConfigAttendance::find(2);
+
+        $startMasuk = Carbon::parse($config_masuk->where('type', 'Masuk')->first()->start)->format('H:i:s');
+        $endMasuk = Carbon::parse($config_masuk->where('type', 'Masuk')->first()->end)->format('H:i:s');
+
+        $startPulang = Carbon::parse($config_pulang->where('type', 'Pulang')->first()->start)->format('H:i:s');
+        $endPulang = Carbon::parse($config_pulang->where('type', 'Pulang')->first()->end)->format('H:i:s');
 
         if ($request->employee_id) {
             $employees = Employee::where('id', $request->employee_id)->where('status', 1)->get();
@@ -361,9 +371,18 @@ class ReportController extends Controller
                     ->orderBy('timestamp', 'asc')
                     ->get();
 
-                // Filter hasil query berdasarkan tipe (type)
-                $in = $attendanceData->where('type', 1)->first();
-                $out = $attendanceData->where('type', 2)->sortByDesc('timestamp')->first();
+                // Filter for earliest "IN" and latest "OUT"
+                $in = $attendanceData->filter(function ($item) use ($startMasuk, $endMasuk) {
+                    return Carbon::parse($item->timestamp)->format('H:i:s') >= $startMasuk &&
+                        Carbon::parse($item->timestamp)->format('H:i:s') <= $endMasuk;
+                })->sortBy('timestamp')->first();
+
+                $out = $attendanceData->filter(function ($item) use ($startPulang, $endPulang) {
+                    return Carbon::parse($item->timestamp)->format('H:i:s') >= $startPulang &&
+                        Carbon::parse($item->timestamp)->format('H:i:s') <= $endPulang;
+                })->sortByDesc('timestamp')->first();
+
+                // Saya ingin IN where timestamp <= endMasuk && timestamp >= endMasuk dan juga outnya
 
                 $leaveAndAbsentData = Employee::with([
                     'paid_leave' => function ($query) use ($i) {
@@ -457,6 +476,15 @@ class ReportController extends Controller
             $employees = Employee::where('status', 1)->get();
         }
 
+        $config_masuk = ConfigAttendance::find(1);
+        $config_pulang = ConfigAttendance::find(2);
+
+        $startMasuk = Carbon::parse($config_masuk->where('type', 'Masuk')->first()->start)->format('H:i:s');
+        $endMasuk = Carbon::parse($config_masuk->where('type', 'Masuk')->first()->end)->format('H:i:s');
+
+        $startPulang = Carbon::parse($config_pulang->where('type', 'Pulang')->first()->start)->format('H:i:s');
+        $endPulang = Carbon::parse($config_pulang->where('type', 'Pulang')->first()->end)->format('H:i:s');
+
         // dd($employees);
 
         $html = '';
@@ -513,10 +541,16 @@ class ReportController extends Controller
                     ->orderBy('timestamp', 'asc')
                     ->get();
 
-                // Filter hasil query berdasarkan tipe (type)
-                $in = $attendanceData->where('type', 1)->first();
-                $out = $attendanceData->where('type', 2)->sortByDesc('timestamp')->first();
+                 // Filter for earliest "IN" and latest "OUT"
+                 $in = $attendanceData->filter(function ($item) use ($startMasuk, $endMasuk) {
+                    return Carbon::parse($item->timestamp)->format('H:i:s') >= $startMasuk &&
+                        Carbon::parse($item->timestamp)->format('H:i:s') <= $endMasuk;
+                })->sortBy('timestamp')->first();
 
+                $out = $attendanceData->filter(function ($item) use ($startPulang, $endPulang) {
+                    return Carbon::parse($item->timestamp)->format('H:i:s') >= $startPulang &&
+                        Carbon::parse($item->timestamp)->format('H:i:s') <= $endPulang;
+                })->sortByDesc('timestamp')->first();
                 $leaveAndAbsentData = Employee::with([
                     'paid_leave' => function ($query) use ($i) {
                         $query->where('validation_director', '!=', NULL)
@@ -607,8 +641,8 @@ class ReportController extends Controller
     {
         $data = [];
 
-        $startDate  = strtotime($request->periode_start);
-        $endDate    = strtotime($request->periode_end);
+        $startDate = strtotime($request->periode_start);
+        $endDate = strtotime($request->periode_end);
 
         if ($request->employee_id) {
             $employees = Employee::where('id', $request->employee_id)->where('status', 1)->get();
@@ -675,8 +709,8 @@ class ReportController extends Controller
         // dd(config('setting.time_in'));
         $data = [];
 
-        $startDate  = strtotime($request->periode_start);
-        $endDate    = strtotime($request->periode_end);
+        $startDate = strtotime($request->periode_start);
+        $endDate = strtotime($request->periode_end);
 
         if ($request->employee_id) {
             $employees = Employee::where('id', $request->employee_id)->where('status', 1)->get();
@@ -793,7 +827,7 @@ class ReportController extends Controller
                             <td>' . $submission->employee->user->name . '</td>
                             <td>' . $submission->title . '</td>
                             <td>' . number_format($nominal) . '</td>
-                            <td>' . $date .  '</td>
+                            <td>' . $date . '</td>
                             <td>' . $validation_finance . '</td>
                         </tr>';
         }
@@ -853,7 +887,7 @@ class ReportController extends Controller
             $tbody .= ' <tr>
                             <td>' . $submission->employee_id . '</td>
                             <td>' . $submission->employee->user->name . '</td>
-                            <td>' . $date .  '</td>
+                            <td>' . $date . '</td>
                             <td>' . $submission->description . '</td>
                             <td>' . $validation_at . '</td>
                             <td>' . $submission->validation_user->name . '</td>
