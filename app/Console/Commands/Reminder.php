@@ -64,13 +64,13 @@ class Reminder extends Command
                     $attendance_in = Attendance::whereTime('timestamp', '<', $config_masuk->end)
                         ->whereDate('timestamp', $yesterday->format('Y-m-d'))
                         ->where('employee_id', $employee->id)
-                        ->oldest()
+                        ->oldest('timestamp')
                         ->first();
 
                     $attendance_out = Attendance::whereTime('timestamp', '>', $config_pulang->start)
                         ->whereDate('timestamp', $yesterday->format('Y-m-d'))
                         ->where('employee_id', $employee->id)
-                        ->latest()
+                        ->latest('timestamp')
                         ->first();
 
                     $daily_report = DailyReport::where('date', $yesterday->format('Y-m-d'))->where('employee_id', $employee->id)->first();
