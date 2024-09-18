@@ -154,9 +154,9 @@ class PaidLeaveController extends Controller
 
             // dd($input);
 
-            // Mail::send('email.send_announcement', $input, function ($message) use ($input) {
-            //     $message->to($input['email'], $input['name'])->cc($input['cc'])->subject($input['subject']);
-            // });
+            Mail::send('email.send_announcement', $input, function ($message) use ($input) {
+                $message->to($input['email'], $input['name'])->cc($input['cc'])->subject($input['subject']);
+            });
 
             return redirect()->route('paid_leaves.employee')->with('success', 'Paid leave added successfully');
         } catch (\Throwable $th) {
