@@ -137,16 +137,6 @@ class PaidLeaveController extends Controller
                 $message->to($input['email'], $input['name'])->subject($input['subject']);
             });
 
-            $finance['description'] = 'Pengajuan cuti ' . $paid_leave->employee->user->name . ' sudah di setujui oleh direktur, silahkan lihat selengkapnya di halaman web <a href="https://ems.tpm-facility.com">https://ems.tpm-facility.com</a>';
-            $finance['subject'] = 'Pengajuan cuti ' . $paid_leave->employee->user->name . ' telah di setujui oleh direktur';
-
-            $finance['email'] = 'rekha.kisnawaty@tpm-facility.com';
-            $finance['name'] = 'Rekha Kisnawaty';
-
-            Mail::send('email.send_announcement', $finance, function ($message) use ($finance) {
-                $message->to($finance['email'], $finance['name'])->subject($finance['subject']);
-            });
-
             return redirect()->route('paid_leaves.director')->with('success', 'Paid leave validation successfully');
         } catch (\Throwable $th) {
             //throw $th;
