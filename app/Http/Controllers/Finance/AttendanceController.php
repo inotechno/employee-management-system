@@ -27,12 +27,12 @@ class AttendanceController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            // $attendances = Attendance::orderBy('timestamp', 'desc')->with('employee', 'employee.user');
             $attendances = Attendance::select('*', DB::raw('DATE(timestamp) as date'))
                 ->with('employee', 'employee.user')
                 ->groupBy(['date', 'employee_id'])
                 ->orderBy('timestamp', 'desc');
 
+            // $attendances = Attendance::orderBy('timestamp', 'desc')->with('employee', 'employee.user');
             if (!empty($request->employee_id)) {
                 $attendances = $attendances->where('employee_id', $request->employee_id);
             }
@@ -43,7 +43,6 @@ class AttendanceController extends Controller
 
             $attendances->get();
             return DataTables::of($attendances)
-
                 ->addIndexColumn()
                 ->addColumn('_in', function ($row) {
                     $data = '';
@@ -54,7 +53,7 @@ class AttendanceController extends Controller
                     $config_masuk = ConfigAttendance::find(1);
                     // $config_pulang = ConfigAttendance::find(2);
 
-                    $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereTime('timestamp', '>=', $config_masuk->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->oldest()->first();
+                    $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereTime('timestamp', '>=', $config_masuk->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->orderBy('timestamp', 'ASC')->first();
                     // $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
 
                     if ($in) {
@@ -65,7 +64,7 @@ class AttendanceController extends Controller
                         $color_time = 'bg-success';
                         $location = '';
 
-                        if (date('H:i', strtotime($in->timestamp)) >= date('H:i', strtotime(config('setting.time_in')))) {
+                        if (date('H:i', strtotime($in->timestamp)) > date('H:i', strtotime(config('setting.time_in')))) {
                             $color_time = 'bg-danger';
                         }
 
@@ -100,13 +99,14 @@ class AttendanceController extends Controller
 
                                 $span = '<span class="badge fs-6 m-1 text bg-warning">' . $in->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
                             } else {
-                                $span = '<span class="badge fs-6 m-1 text bg-info">' . $row->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
+                                $span = '<span class="badge fs-6 m-1 text bg-info">' . $in->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
                             }
                         } else {
                             $span = '<span class="badge fs-6 m-1 text bg-warning">' . $in->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Coordinate site not found</span>';
                         }
 
-                        $attendance = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($in->timestamp)) . '</span>' . $span . ' ' . $location;
+                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-in" data-keterangan="' . $in->keterangan . '" data-photo="' . asset('images/attendances/' . $in->photo) . '">Detail <span class="bx bxs-hand-up"></span></a>';
+                        $attendance = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($in->timestamp)) . '</span>' . $span . ' ' . $location . ' ' . $detail;
                     }
 
                     $data = $attendance;
@@ -123,7 +123,7 @@ class AttendanceController extends Controller
                     $config_pulang = ConfigAttendance::find(2);
 
                     // $out = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->oldest()->first();
-                    $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereTime('timestamp', '<=', $config_pulang->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
+                    $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereTime('timestamp', '<=', $config_pulang->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->orderBy('timestamp', 'DESC')->first();
 
                     if ($out) {
                         $span = '';
@@ -133,7 +133,7 @@ class AttendanceController extends Controller
                         $color_time = 'bg-success';
                         $location = '';
 
-                        if (date('H:i', strtotime($out->timestamp)) <= date('H:i', strtotime(config('setting.time_out')))) {
+                        if (date('H:i', strtotime($out->timestamp)) < date('H:i', strtotime(config('setting.time_out')))) {
                             $color_time = 'bg-danger';
                         }
 
@@ -168,14 +168,15 @@ class AttendanceController extends Controller
 
                                 $span = '<span class="badge fs-6 m-1 text bg-warning">' . $out->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
                             } else {
-                                $span = '<span class="badge fs-6 m-1 text bg-info">' . $row->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
+                                $span = '<span class="badge fs-6 m-1 text bg-info">' . $out->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
                             }
                         } else {
                             $span = '<span class="badge fs-6 m-1 text bg-warning">' . $out->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Coordinate site not found</span>';
                         }
 
                         // $span = '<span class="badge fs-6 m-1 text bg-info">' . $row->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
-                        $attendance = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($out->timestamp)) . '</span>' . $span . ' ' . $location;
+                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-out" data-keterangan="' . $out->keterangan . '" data-photo="' . asset('images/attendances/' . $out->photo) . '">Detail <span class="bx bxs-hand-up"></span></a>';
+                        $attendance = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($out->timestamp)) . '</span>' . $span . ' ' . $location . ' ' . $detail;
                     }
 
                     $data = $attendance;

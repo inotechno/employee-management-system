@@ -31,39 +31,6 @@ class AttendanceController extends Controller
         return view('_hrd.attendances.index');
     }
 
-    // public function sync()
-    // {
-    //     // if ($this->zk->connect()) {
-    //     $get = $this->zk->getAttendance();
-    //     // dd($get);
-    //     $config_masuk = ConfigAttendance::find(1);
-    //     $config_pulang = ConfigAttendance::find(2);
-    //     foreach ($get as $att => $val) {
-    //         $time = date('H:i:s', strtotime($val['timestamp']));
-    //         if ($time >= $config_masuk->start && $time <= $config_masuk->end) {
-    //             $type = $config_masuk->id;
-    //         } else if ($time >= $config_pulang->start && $time <= $config_pulang->end) {
-    //             $type = $config_pulang->id;
-    //         } else {
-    //             $type = 0;
-    //         }
-
-    //         $att = Attendance::updateOrCreate([
-    //             'uid' => $val['uid'],
-    //         ], [
-    //             'employee_id'       => $val['id'],
-    //             'state'             => $val['state'],
-    //             'timestamp'         => $val['timestamp'],
-    //             'type'              => $type,
-    //             'longitude'         => '106.798818',
-    //             'latitude'          => '-6.263122'
-    //         ]);
-    //     }
-
-    //     return redirect()->back()->with('success', 'Syncronize success');
-    //     // }
-    // }
-
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
