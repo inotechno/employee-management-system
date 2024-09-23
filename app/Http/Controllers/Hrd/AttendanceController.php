@@ -80,6 +80,7 @@ class AttendanceController extends Controller
             if (!empty($request->date)) {
                 $attendances = $attendances->whereDate('timestamp', '=', $request->date);
             }
+
             $attendances->get();
             return DataTables::of($attendances)
                 ->addIndexColumn()

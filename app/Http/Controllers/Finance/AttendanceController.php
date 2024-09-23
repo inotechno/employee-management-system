@@ -41,7 +41,6 @@ class AttendanceController extends Controller
                 $attendances = $attendances->whereDate('timestamp', '=', $request->date);
             }
 
-
             $attendances->get();
             return DataTables::of($attendances)
 
