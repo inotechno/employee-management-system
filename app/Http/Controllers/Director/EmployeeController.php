@@ -36,7 +36,7 @@ class EmployeeController extends Controller
     {
         if ($request->ajax()) {
             // $store = Store::where('user_id', auth()->user()->id)->first();
-            $employees = Employee::with('position', 'user')->where('status', 1);
+            $employees = Employee::with('position', 'user');
             // dd($order);
             return DataTables::eloquent($employees)
                 ->addIndexColumn()
