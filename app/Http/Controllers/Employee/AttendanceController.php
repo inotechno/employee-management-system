@@ -25,7 +25,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $events = EventAttendance::whereNotIn('slug', ['fingerprint'])->get();
+        $events = EventAttendance::whereNotIn('slug', ['machine', 'access-control'])->get();
         return view('_employees.attendances.index', compact('events'));
     }
 
@@ -72,10 +72,10 @@ class AttendanceController extends Controller
 
                     $config_masuk = ConfigAttendance::find(1);
                     // $config_pulang = ConfigAttendance::find(2);
-
+    
                     $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereTime('timestamp', '>=', $config_masuk->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->orderBy('timestamp', 'ASC')->first();
                     // $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
-
+    
                     if ($in) {
                         $span = '';
                         $color = "bg-success";
@@ -217,11 +217,11 @@ class AttendanceController extends Controller
         // dd($request);
         $validator = $request->validate([
             'event_id' => 'required',
-            'longitude'   => 'required',
-            'latitude'   => 'required',
-            'site_uid'   => 'required_if:event_id,2',
-            'keterangan'   => 'required',
-            'photo'         => 'required_if:event_id,1|image|mimes:jpeg,png,jpg,gif|max:3000',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'site_uid' => 'required_if:event_id,2',
+            'keterangan' => 'required',
+            'photo' => 'required_if:event_id,1',
         ]);
 
         $config_masuk = ConfigAttendance::find(1);
@@ -245,27 +245,60 @@ class AttendanceController extends Controller
                 $site_id = $site->id;
             }
 
+            // $dataPhoto = null;
+            // $photo = $request->file('photo');
+            // if(!empty($photo)) {     
+            //     $dataPhoto = date('YmdHis') . '.' . $photo->extension();
+
+            //     $destinationPath = public_path('images/attendances/');
+            //     $photo->move($destinationPath, $dataPhoto);
+            // }
+
+            // Proses foto yang diambil dari input hidden 'photo'
             $dataPhoto = null;
-            $photo = $request->file('photo');
-            if(!empty($photo)) {     
-                $dataPhoto = date('YmdHis') . '.' . $photo->extension();
-    
-                $destinationPath = public_path('images/attendances/');
-                $photo->move($destinationPath, $dataPhoto);
-            }
+            if (!empty($request->photo)) {
+                // Nama file dengan timestamp
+                $dataPhoto = date('YmdHis') . '.png'; // Simpan sebagai file PNG
+                $base64Photo = $request->photo;
+            
+                // Validasi apakah base64 memiliki prefix seperti 'data:image/png;base64,'
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Photo, $type)) {
+                    $data = substr($base64Photo, strpos($base64Photo, ',') + 1);
+                    $type = strtolower($type[1]); // Dapatkan tipe gambar (jpeg, png, dll.)
+            
+                    if (!in_array($type, ['jpg', 'jpeg', 'png'])) {
+                        throw new \Exception('Format gambar tidak didukung');
+                    }
+            
+                    // Decode base64 dan simpan ke file
+                    $data = base64_decode($data);
+            
+                    if ($data === false) {
+                        throw new \Exception('Base64 decoding gagal');
+                    }
+            
+                    // Tentukan path penyimpanan
+                    $imagePath = public_path('images/attendances/') . $dataPhoto;
+                    
+                    // Simpan file gambar ke folder
+                    file_put_contents($imagePath, $data);
+                } else {
+                    throw new \Exception('Foto tidak valid');
+                }
+            }            
 
             if ($request->event_id == 1) {
                 $attendance = AttendanceTemporary::create([
-                    'employee_id'   => auth()->user()->employee->id,
-                    'state'         => 1,
-                    'timestamp'     => $timestamp,
-                    'type'          => $type,
-                    'event_id'      => $request->event_id,
-                    'site_id'       => $site_id,
-                    'longitude'     => $request->longitude,
-                    'latitude'      => $request->latitude,
-                    'keterangan'    => $request->keterangan,
-                    'photo'         => $dataPhoto
+                    'employee_id' => auth()->user()->employee->id,
+                    'state' => 1,
+                    'timestamp' => $timestamp,
+                    'type' => $type,
+                    'event_id' => $request->event_id,
+                    'site_id' => $site_id,
+                    'longitude' => $request->longitude,
+                    'latitude' => $request->latitude,
+                    'keterangan' => $request->keterangan,
+                    'photo' => $dataPhoto
                 ]);
 
                 $input['description'] = $attendance->employee->user->name . ' melakukan absensi menggunakan tag lokasi dengan keterangan <b>' . $request->keterangan . '</b> mohon untuk melihat dan validasi absensi tersebut pada aplikasi <a href="https://ems.tpm-facility.com">https://ems.tpm-facility.com</a><br><br>Terima Kasih';
@@ -285,16 +318,16 @@ class AttendanceController extends Controller
                 return redirect()->route('attendances.employee')->with('success', 'Absensi harus di validasi oleh HRD terlebih dahulu!');
             } else {
                 $attendance = Attendance::create([
-                    'employee_id'   => auth()->user()->employee->id,
-                    'state'         => 1,
-                    'timestamp'     => $timestamp,
-                    'type'          => $type,
-                    'event_id'      => $request->event_id,
-                    'site_id'       => $site_id,
-                    'longitude'     => $request->longitude,
-                    'latitude'      => $request->latitude,
-                    'keterangan'    => $request->keterangan,
-                    'photo'         => $dataPhoto
+                    'employee_id' => auth()->user()->employee->id,
+                    'state' => 1,
+                    'timestamp' => $timestamp,
+                    'type' => $type,
+                    'event_id' => $request->event_id,
+                    'site_id' => $site_id,
+                    'longitude' => $request->longitude,
+                    'latitude' => $request->latitude,
+                    'keterangan' => $request->keterangan,
+                    'photo' => $dataPhoto
                 ]);
 
                 return redirect()->route('attendances.employee')->with('success', 'attendance created successfully');
