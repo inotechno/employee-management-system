@@ -37,35 +37,35 @@
         }
     </style>
 
-<style>
-    .camera-container {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        /* Adjust based on your layout */
-    }
+    <style>
+        .camera-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            /* Adjust based on your layout */
+        }
 
-    #cameraFeed {
-        width: 100%;
-        height: auto;
-    }
+        #cameraFeed {
+            width: 100%;
+            height: auto;
+        }
 
-    .camera-controls {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 10px;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 5px;
-        border-radius: 10px;
-    }
+        .camera-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 10px;
+        }
 
-    .camera-controls button {
-        color: white;
-    }
-</style>
+        .camera-controls button {
+            color: white;
+        }
+    </style>
 @endsection
 
 
@@ -237,7 +237,10 @@
 
     <script>
         $(function() {
+
             const video = document.getElementById('cameraFeed');
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
             const canvas = document.getElementById('cameraCanvas');
             const captureButton = document.getElementById('capturePhoto');
             const switchButton = document.getElementById('switchCamera');
@@ -254,8 +257,6 @@
             }
 
             function startCamera(deviceId) {
-                stopCamera();
-
                 setTimeout(() => {
                     const constraints = {
                         video: deviceId ? {
@@ -276,6 +277,9 @@
                         });
                 }, 100);
             }
+
+            getVideoDevices();
+            getLocation();
 
             function getVideoDevices() {
                 navigator.mediaDevices.enumerateDevices()
@@ -327,14 +331,14 @@
             switchButton.addEventListener('click', function() {
                 if (videoDevices.length > 1) {
                     currentIndex = (currentIndex + 1) % videoDevices.length;
+                    stopCamera();
+
                     startCamera(videoDevices[currentIndex].deviceId);
                 } else {
                     alert("Hanya ada satu kamera yang tersedia.");
                     console.log("Hanya ada satu kamera yang tersedia.");
                 }
             });
-
-            getVideoDevices();
 
             $('#qr-reader').hide();
             $('#alert-tag').hide();
@@ -401,6 +405,7 @@
             $('#event').change(function() {
                 var val = $(this).val();
                 console.log(val);
+
                 if (val == 1) {
                     $('#alert-tag').fadeIn();
                     $('#map').show();
@@ -421,24 +426,58 @@
             })
 
             function getLocation() {
+                // Cek dukungan geolocation
+                if (!navigator.geolocation) {
+                    notification("error", "Geolocation is not supported by this browser.");
+                    return;
+                }
+
                 const options = {
                     enableHighAccuracy: true,
                     timeout: 10000,
+                    maximumAge: 0 // Selalu dapatkan posisi terbaru
                 };
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-                } else {
-                    notification("error", "Geolocation is not supported by this browser.");
+
+                try {
+                    navigator.permissions.query({
+                        name: 'geolocation'
+                    }).then(function(result) {
+                        if (result.state === 'denied') {
+                            notification("error", "Please enable location access in your browser settings");
+                            return;
+                        }
+
+                        // Request position
+                        navigator.geolocation.getCurrentPosition(
+                            showPosition,
+                            showError,
+                            options
+                        );
+                    });
+                } catch (error) {
+                    notification("error", "Error accessing location: " + error.message);
                 }
             }
 
             function showPosition(position) {
-                $('[name="longitude"]').val(position.coords
-                    .longitude);
-                $('[name="latitude"]').val(position.coords.latitude);
+                try {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
 
-                $('#location').html("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords
-                    .longitude);
+                    // Validasi koordinat
+                    if (!isValidCoordinate(latitude, longitude)) {
+                        notification("error", "Invalid coordinates received");
+                        return;
+                    }
+
+                    $('[name="longitude"]').val(longitude);
+                    $('[name="latitude"]').val(latitude);
+                    $('#location').html(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+                    notification("success", "Location successfully obtained");
+                } catch (error) {
+                    notification("error", "Error processing location data: " + error.message);
+                }
             }
 
             function showError(error) {
@@ -456,6 +495,11 @@
                         notification("error", "An unknown error occurred.")
                         break;
                 }
+            }
+
+            // Fungsi helper untuk validasi koordinat
+            function isValidCoordinate(lat, lng) {
+                return lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
             }
 
             function qrcode() {
@@ -541,6 +585,7 @@
                             'Klik pada tombol koordinat terlebih dahulu untuk menentukan lokasi');
                         return false;
                     } else {
+                        video.pause();
                         return true;
                     }
                 } else {
@@ -548,6 +593,7 @@
                         notification('error', 'Scan qr terlebih dahulu');
                         return false;
                     } else {
+                        video.pause();
                         return true;
                     }
                 }

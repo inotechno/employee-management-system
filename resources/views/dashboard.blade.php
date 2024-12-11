@@ -310,12 +310,12 @@
                                         <tr>
                                             <td class="d-flex">
                                                 <div>
-                                                    <h5 class="fs-13 mb-0">{{ $visit->site->name }}</h5>
-                                                    @if ($visit->site->longitude == null)
+                                                    <h5 class="fs-13 mb-0">{{ $visit->site ? $visit->site->name : '' }}</h5>
+                                                    @if ($visit->site == null || $visit->site->longitude == null)
                                                         <p class="fs-12 mb-0 text-muted">NULL</p>
                                                     @else
                                                         <p class="fs-12 mb-0 text-muted">
-                                                            {{ $visit->site->longitude . ', ' . $visit->site->latitude }}
+                                                            {{ $visit->site ? $visit->site->longitude : '' . ', ' . $visit->site ? $visit->site->latitude : '' }}
                                                         </p>
                                                     @endif
                                                 </div>
