@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Models\Submission;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -90,7 +91,7 @@ class SubmissionController extends Controller
                                     <i class="bx bx-receipt bx-xs"></i>
                                 </button>';
                     } else {
-                        return '<a title="Bukti" target="_blank" href="' . asset('images/receipts/' . $row->receipt_image) . '" class="btn btn-warning btn-sm" data-id="' . $row->id . '">
+                        return '<a title="Bukti" target="_blank" href="' . $row->receipt_image . '" class="btn btn-warning btn-sm" data-id="' . $row->id . '">
                                     <i class="bx bx-receipt bx-xs"></i>
                                 </a>';
                     }
@@ -301,11 +302,10 @@ class SubmissionController extends Controller
         try {
             $data = [];
             if ($request->file('receipt_image')) {
-                $receipt_image = $request->file('receipt_image');
-                $data['receipt_image'] = md5(Str::random(100)) . '.' . $receipt_image->extension();
+                $file = $request->file('receipt_image');
+                $path = $file->store('images/receipts', 'gcs');
 
-                $destinationPath = public_path('images/receipts/');
-                $receipt_image->move($destinationPath, $data['receipt_image']);
+                $data['receipt_image'] = Storage::disk('gcs')->url($path);
             }
 
             $submission->update($data);
@@ -383,7 +383,7 @@ class SubmissionController extends Controller
                     }
 
                     if ($row->receipt_image != NULL) {
-                        $button = '<a title="Bukti" target="_blank" href="' . asset('images/receipts/' . $row->receipt_image) . '" class="btn btn-warning btn-sm btn-receipt" data-id="' . $row->id . '">
+                        $button = '<a title="Bukti" target="_blank" href="' . $row->receipt_image . '" class="btn btn-warning btn-sm btn-receipt" data-id="' . $row->id . '">
                                         <i class="bx bx-receipt bx-xs"></i>
                                     </a>';
                     }

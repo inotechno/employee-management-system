@@ -114,7 +114,7 @@ class AttendanceTemporaryController extends Controller
                             $span = '<span class="badge fs-6 m-1 text bg-warning">' . $in->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Coordinate site not found</span>';
                         }
 
-                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-in" data-keterangan="' . $in->keterangan . '" data-photo="' . asset('images/attendances/' . $in->photo) . '">Detail <span class="bx bxs-hand-up"></span></a>';
+                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-in" data-keterangan="' . $in->keterangan . '" data-photo="' . $in->photo . '">Detail <span class="bx bxs-hand-up"></span></a>';
                         $attendance = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($in->timestamp)) . '</span>' . $span . ' ' . $location . ' ' . $detail .
                             '<button type="button" class="btn btn-primary btn-sm waves-effect waves-light btn-validation" data-id="' . $in->id . '"><i class="bx bx-check-double align-middle me-2"></i>Validasi</button>';
                     }
@@ -185,7 +185,7 @@ class AttendanceTemporaryController extends Controller
                         }
 
                         // $span = '<span class="badge fs-6 m-1 text bg-info">' . $row->event->name . '</span><span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
-                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-out" data-keterangan="' . $out->keterangan . '" data-photo="' . asset('images/attendances/' . $out->photo) . '">Detail <span class="bx bxs-hand-up"></span></a>';
+                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-out" data-keterangan="' . $out->keterangan . '" data-photo="' . $out->photo . '">Detail <span class="bx bxs-hand-up"></span></a>';
                         $attendance = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($out->timestamp)) . '</span>' . $span . ' ' . $location . ' ' . $detail .
                             '<button type="button" class="btn btn-primary btn-sm waves-effect waves-light btn-validation" data-id="' . $out->id . '"><i class="bx bx-check-double align-middle me-2"></i>Validasi</button>';
                     }

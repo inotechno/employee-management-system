@@ -6,6 +6,7 @@ use App\Helpers\CompareDistance;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 use App\Models\ConfigAttendance;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\AttendanceTemporary;
@@ -72,10 +73,10 @@ class AttendanceController extends Controller
 
                     $config_masuk = ConfigAttendance::find(1);
                     // $config_pulang = ConfigAttendance::find(2);
-    
+
                     $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereTime('timestamp', '>=', $config_masuk->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->orderBy('timestamp', 'ASC')->first();
                     // $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
-    
+
                     if ($in) {
                         $span = '';
                         $color = "bg-success";
@@ -247,7 +248,7 @@ class AttendanceController extends Controller
 
             // $dataPhoto = null;
             // $photo = $request->file('photo');
-            // if(!empty($photo)) {     
+            // if(!empty($photo)) {
             //     $dataPhoto = date('YmdHis') . '.' . $photo->extension();
 
             //     $destinationPath = public_path('images/attendances/');
@@ -256,36 +257,43 @@ class AttendanceController extends Controller
 
             // Proses foto yang diambil dari input hidden 'photo'
             $dataPhoto = null;
+            $photoUrl = null;
             if (!empty($request->photo)) {
                 // Nama file dengan timestamp
                 $dataPhoto = date('YmdHis') . '.png'; // Simpan sebagai file PNG
                 $base64Photo = $request->photo;
-            
+
                 // Validasi apakah base64 memiliki prefix seperti 'data:image/png;base64,'
                 if (preg_match('/^data:image\/(\w+);base64,/', $base64Photo, $type)) {
                     $data = substr($base64Photo, strpos($base64Photo, ',') + 1);
                     $type = strtolower($type[1]); // Dapatkan tipe gambar (jpeg, png, dll.)
-            
+
                     if (!in_array($type, ['jpg', 'jpeg', 'png'])) {
                         throw new \Exception('Format gambar tidak didukung');
                     }
-            
+
                     // Decode base64 dan simpan ke file
                     $data = base64_decode($data);
-            
+
                     if ($data === false) {
                         throw new \Exception('Base64 decoding gagal');
                     }
-            
+
                     // Tentukan path penyimpanan
-                    $imagePath = public_path('images/attendances/') . $dataPhoto;
-                    
-                    // Simpan file gambar ke folder
-                    file_put_contents($imagePath, $data);
+                    $imagePath = 'images/attendances/' . $dataPhoto;
+
+                    // Simpan file ke GCS menggunakan Storage::disk
+                    Storage::disk('gcs')->put($imagePath, $data, [
+                        'visibility' => 'public',
+                        'ContentType' => 'image/' . $type
+                    ]);
+
+                    // URL publik untuk file yang diunggah
+                    $photoUrl = Storage::disk('gcs')->url($imagePath);
                 } else {
                     throw new \Exception('Foto tidak valid');
                 }
-            }            
+            }
 
             if ($request->event_id == 1) {
                 $attendance = AttendanceTemporary::create([
@@ -298,7 +306,7 @@ class AttendanceController extends Controller
                     'longitude' => $request->longitude,
                     'latitude' => $request->latitude,
                     'keterangan' => $request->keterangan,
-                    'photo' => $dataPhoto
+                    'photo' => $photoUrl
                 ]);
 
                 $input['description'] = $attendance->employee->user->name . ' melakukan absensi menggunakan tag lokasi dengan keterangan <b>' . $request->keterangan . '</b> mohon untuk melihat dan validasi absensi tersebut pada aplikasi <a href="https://ems.tpm-facility.com">https://ems.tpm-facility.com</a><br><br>Terima Kasih';
@@ -327,7 +335,7 @@ class AttendanceController extends Controller
                     'longitude' => $request->longitude,
                     'latitude' => $request->latitude,
                     'keterangan' => $request->keterangan,
-                    'photo' => $dataPhoto
+                    'photo' => $photoUrl
                 ]);
 
                 return redirect()->route('attendances.employee')->with('success', 'attendance created successfully');

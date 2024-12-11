@@ -70,7 +70,7 @@ class SubmissionController extends Controller
                                 </button>';
 
                     if ($row->receipt_image != NULL) {
-                        $button .= '<a title="Bukti" target="_blank" href="' . asset('images/receipts/' . $row->receipt_image) . '" class="btn btn-warning btn-sm btn-receipt" data-id="' . $row->id . '">
+                        $button .= '<a title="Bukti" target="_blank" href="' . $row->receipt_image . '" class="btn btn-warning btn-sm btn-receipt" data-id="' . $row->id . '">
                                         <i class="bx bx-receipt bx-xs"></i>
                                     </a>';
                     }

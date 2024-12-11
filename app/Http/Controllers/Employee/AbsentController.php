@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Models\Absent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -82,7 +83,7 @@ class AbsentController extends Controller
                     }
 
                     if ($row->file != NULL) {
-                        $button .= '<button class="btn btn-primary ms-1 btn-sm btn-view-file" data-file="' . asset('images/absents/' . $row->file) . '" data-id="' . $row->id . '" title="View File">
+                        $button .= '<button class="btn btn-primary ms-1 btn-sm btn-view-file" data-file="' .$row->file . '" data-id="' . $row->id . '" title="View File">
                                             <i class="bx bx-file-find bx-xs"></i>
                                         </button>';
                     } else {
@@ -213,14 +214,9 @@ class AbsentController extends Controller
 
             if ($request->file('file')) {
                 $file = $request->file('file');
-                $data['file'] = date('YmdHis') . '.' . $file->extension();
+                $path = $file->store('images/absents', 'gcs');
 
-                $destinationPath = public_path('images/absents/');
-                $file->move($destinationPath, $data['file']);
-
-                if ($absent->file != NULL) {
-                    File::delete('images/absents/' . $absent->file);
-                }
+                $data['file'] = Storage::disk('gcs')->url($path);
             }
 
             $absent->update($data);

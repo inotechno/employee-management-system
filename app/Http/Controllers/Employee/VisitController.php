@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Helpers\CompareDistance;
 use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\Site;
@@ -64,7 +65,7 @@ class VisitController extends Controller
                                 </button>';
 
                     if ($row->file != NULL) {
-                        $button .= '<button class="btn btn-soft-info btn-sm ms-1 btn-view-file"  data-file="' . asset('images/visits/' . $row->file) . '" data-id="' . $row->id . '">
+                        $button .= '<button class="btn btn-soft-info btn-sm ms-1 btn-view-file"  data-file="' . $row->file . '" data-id="' . $row->id . '">
                                         <i class="bx bx-file"></i> View File
                                     </button>';
                     }
@@ -82,11 +83,11 @@ class VisitController extends Controller
     {
         // dd($request);
         $validator = $request->validate([
-            'visit_category_id'    => 'required',
-            'keterangan'    => 'required',
-            'longitude'     => 'required',
-            'latitude'      => 'required',
-            'status'        => 'required',
+            'visit_category_id' => 'required',
+            'keterangan' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'status' => 'required',
         ]);
 
         try {
@@ -99,13 +100,13 @@ class VisitController extends Controller
             }
 
             $visit = Visit::create([
-                'employee_id'           => auth()->user()->employee->id,
-                'site_id'               => $site_id,
-                'longitude'             => $request->longitude,
-                'latitude'              => $request->latitude,
-                'visit_category_id'     => $request->visit_category_id,
-                'keterangan'            => $request->keterangan,
-                'status'                => $request->status
+                'employee_id' => auth()->user()->employee->id,
+                'site_id' => $site_id,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
+                'visit_category_id' => $request->visit_category_id,
+                'keterangan' => $request->keterangan,
+                'status' => $request->status
             ]);
 
             return redirect()->route('visits.employee')->with('success', 'attendance created successfully');
@@ -167,14 +168,9 @@ class VisitController extends Controller
 
             if ($request->file('file')) {
                 $file = $request->file('file');
-                $data['file'] = date('YmdHis') . '.' . $file->extension();
+                $path = $file->store('images/visits', 'gcs');
 
-                $destinationPath = public_path('images/visits/');
-                $file->move($destinationPath, $data['file']);
-
-                if ($absent->file != NULL) {
-                    File::delete('images/visits/' . $absent->file);
-                }
+                $data['file'] = Storage::disk('gcs')->url($path);
             }
 
             $absent->update($data);

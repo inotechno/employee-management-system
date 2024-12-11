@@ -93,7 +93,7 @@ class VisitController extends Controller
                             $color = 'bg-warning';
                         }
 
-                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-in" data-keterangan="' . $in->keterangan . '" data-file="' . asset('images/visits/' . $in->file) . '">Detail <span class="bx bxs-hand-up"></span></a>';
+                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-in" data-keterangan="' . $in->keterangan . '" data-file="' . $in->file . '">Detail <span class="bx bxs-hand-up"></span></a>';
                         $span = $site_name . '<span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
                         $visit = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($in->created_at)) . '</span>' . $span . ' ' . $location . ' ' . $detail;
                     }
@@ -149,7 +149,7 @@ class VisitController extends Controller
                             $color = 'bg-warning';
                         }
 
-                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-out" data-keterangan="' . $out->keterangan . '"  data-file="' . asset('images/visits/' . $out->file) . '">Detail <span class="bx bxs-hand-up"></span></a>';
+                        $detail = '<a href="#" class="badge fs-6 m-1 bg-primary btn-detail-out" data-keterangan="' . $out->keterangan . '"  data-file="' . $out->file . '">Detail <span class="bx bxs-hand-up"></span></a>';
                         $span = $site_name . '<span class="badge fs-6 m-1 text ' . $color . ' ">Distance : ' . intval($distance) . ' ' . $unit . '</span>';
                         $visit = '<span class="badge fs-6 m-1 text ' . $color_time . '">' . DATE('H:i', strtotime($out->created_at)) . '</span>' . $span . ' ' . $location . ' ' . $detail;
                     }

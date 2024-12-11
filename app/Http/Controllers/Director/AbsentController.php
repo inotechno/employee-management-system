@@ -67,7 +67,7 @@ class AbsentController extends Controller
                     }
 
                     if ($row->file != NULL) {
-                        $button .= '<button class="btn btn-primary ms-1 btn-sm btn-view-file" data-file="' . asset('images/absents/' . $row->file) . '" data-id="' . $row->id . '" title="View File">
+                        $button .= '<button class="btn btn-primary ms-1 btn-sm btn-view-file" data-file="' . $row->file . '" data-id="' . $row->id . '" title="View File">
                                         <i class="bx bx-file-find bx-xs"></i>
                                     </button>';
                     }
