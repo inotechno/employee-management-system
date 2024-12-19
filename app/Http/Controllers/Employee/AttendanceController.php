@@ -283,10 +283,7 @@ class AttendanceController extends Controller
                     $imagePath = 'images/attendances/' . $dataPhoto;
 
                     // Simpan file ke GCS menggunakan Storage::disk
-                    Storage::disk('gcs')->put($imagePath, $data, [
-                        'visibility' => 'public',
-                        'ContentType' => 'image/' . $type
-                    ]);
+                    Storage::disk('gcs')->put($imagePath, $data);
 
                     // URL publik untuk file yang diunggah
                     $photoUrl = Storage::disk('gcs')->url($imagePath);

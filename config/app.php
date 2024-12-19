@@ -171,6 +171,7 @@ return [
         App\Providers\CompareDistanceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         KwikKoders\Zkteco\ZktecoServiceProvider::class,
+        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
 
         /*
         * Application Service Providers...
