@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\AttendanceSyncJob;
 use App\Models\ConfigAttendance;
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class IClockController extends Controller
@@ -42,6 +43,7 @@ class IClockController extends Controller
 
     public function receiveRecords(Request $request)
     {
+
         $configurations = ConfigAttendance::whereIn('id', [1, 2])->select('id', 'start', 'end')->get()->keyBy('id');
         $siteId = 84;
 
@@ -81,6 +83,24 @@ class IClockController extends Controller
                 if($employee != null) {
                     $email = $employee->user->email;
                     $name = $employee->user->name;
+                }else {
+                    $newUser = User::updateOrCreate([
+                        'username' => $data[0]
+                    ], [
+                        'name'      => $data[0],
+                        'password'  => bcrypt($data[0])
+                    ]);
+
+                    $newUser->assignRole('employee');
+
+                    $employee = Employee::updateOrCreate([
+                        'id' => $data[0]
+                    ], [
+                        'user_id' => $newUser->id,
+                    ]);
+
+                    $email = $newUser->email;
+                    $name = $newUser->name;
                 }
 
                 $attendanceData[] = [
