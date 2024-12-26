@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Rats\Zkteco\Lib\ZKTeco;
+use Illuminate\Support\Facades\Mail;
 
 class AttendanceSyncJob implements ShouldQueue
 {
@@ -43,6 +44,19 @@ class AttendanceSyncJob implements ShouldQueue
                     ['uid' => $dt['uid']],
                     $dt
                 );
+
+                if ($dt['email'] != null) {
+                    $input['description'] = 'Hai ' . $dt['name'] . ', absensi Anda pada ' . date('d M Y, H:i', strtotime($dt['timestamp'])) . ' berhasil tercatat. Terima kasih atas kedisiplinan Anda!';
+                    $input['subject'] = 'Konfirmasi Absensi Berhasil - Tetap Semangat Bekerja!';
+
+                    $input['email'] = $dt['email'];
+                    $input['name'] = $dt['name'];
+
+                    Mail::send('email.send_announcement', $input, function ($message) use ($input) {
+                        $message->to($input['email'], $input['name'])->subject($input['subject']);
+                    });
+                }
+
             }
 
             \Log::info(date('Y-m-d H:i:s') . ' ' . 'Attendance Sync Job Completed Successfully');

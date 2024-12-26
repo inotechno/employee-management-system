@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\AttendanceSyncJob;
 use App\Models\ConfigAttendance;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class IClockController extends Controller
@@ -72,6 +73,15 @@ class IClockController extends Controller
                 $time = date('H:i:s', strtotime($data[1]));
 
                 $type = $this->getAttendanceType($time, $configurations);
+                $employee = $this->getEmployee($data[0]);
+
+                $email = '';
+                $name = '';
+
+                if($employee != null) {
+                    $email = $employee->user->email;
+                    $name = $employee->user->name;
+                }
 
                 $attendanceData[] = [
                     'uid' => $data[0] . date('Hi'),
@@ -82,8 +92,12 @@ class IClockController extends Controller
                     'site_id' => $siteId,
                     'event_id' => 3,
                     'longitude' => '106.798818',
-                    'latitude' => '-6.263122'
+                    'latitude' => '-6.263122',
+                    'email' => $email,
+                    'name' => $name
                 ];
+
+                activity()->log('Record Attendance: ' . $data[0]);
 
                 AttendanceSyncJob::dispatch($attendanceData);
                 $tot++;
@@ -114,5 +128,10 @@ class IClockController extends Controller
         }
 
         return $defaultType;
+    }
+
+    protected function getEmployee($id)
+    {
+        return Employee::with('user')->find($id) ?? null;
     }
 }
