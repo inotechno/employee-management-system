@@ -37,7 +37,7 @@ class SubmissionController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $submission = Submission::with('supervisor')->where('employee_id', auth()->user()->employee->id);
+            $submission = Submission::with('supervisor')->where('employee_id', auth()->user()->employee->id)->orderBy('created_at', 'DESC');
             // dd($submission->get());
             return DataTables::eloquent($submission)
                 ->addIndexColumn()

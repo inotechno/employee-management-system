@@ -140,6 +140,12 @@ Route::put('/importdata/upload', [ImportEmployeeController::class, 'process_uplo
 Route::get('/attendances/sync', [AttendanceController::class, 'sync'])->name('attendances.sync');
 Route::get('/employees/sync', [EmployeeController::class, 'sync'])->name('employees.sync');
 
+Route::get('/iclock/cdata', [AttendanceController::class, 'handshake']);
+Route::post('/iclock/cdata', [AttendanceController::class, 'receiveRecords']);
+
+Route::get('/iclock/test', [AttendanceController::class, 'test']);
+Route::get('/iclock/getrequest', [AttendanceController::class, 'getrequest']);
+
 // daily Report Route
 Route::get('/daily-report', [DirectorDailyReportController::class, 'index'])->name('daily_reports.all');
 Route::get('/daily-report/show/{id}', [DirectorDailyReportController::class, 'show'])->name('daily_reports.show.all');

@@ -9,5 +9,5 @@ class Machine extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'ip', 'port', 'comkey', 'active'];
+    protected $fillable = ['name', 'ip', 'port', 'comkey', 'active', 'number_sn'];
 }

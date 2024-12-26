@@ -35,7 +35,7 @@ class AbsentController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $absent = Absent::with('validation_user')->where('employee_id', auth()->user()->employee->id);
+            $absent = Absent::with('validation_user')->where('employee_id', auth()->user()->employee->id)->orderBy('created_at', 'DESC');
             // dd($absent->get());
             return DataTables::eloquent($absent)
                 ->addIndexColumn()

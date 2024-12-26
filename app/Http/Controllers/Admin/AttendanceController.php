@@ -87,10 +87,10 @@ class AttendanceController extends Controller
 
                     $config_masuk = ConfigAttendance::find(1);
                     // $config_pulang = ConfigAttendance::find(2);
-
+    
                     $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->orderBy('timestamp', 'ASC')->first();
                     // $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
-
+    
                     if ($in) {
                         $span = '';
                         $color = "bg-success";
@@ -329,8 +329,8 @@ class AttendanceController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'employee_id'   => 'required',
-            'timestamp'   => 'required',
+            'employee_id' => 'required',
+            'timestamp' => 'required',
         ]);
 
         $site_uid = 'DNevn0QTWnkLiFW';
@@ -356,14 +356,14 @@ class AttendanceController extends Controller
             $site_id = Site::where('uid', $site_uid)->first();
 
             $attendance = Attendance::create([
-                'employee_id'   => $request->employee_id,
-                'state'         => 1,
-                'timestamp'     => $request->timestamp,
-                'type'          => $type,
-                'site_id'       => $site_id->id,
-                'longitude'     => '106.798818',
-                'latitude'      => '-6.263122',
-                'event_id'      => 3
+                'employee_id' => $request->employee_id,
+                'state' => 1,
+                'timestamp' => $request->timestamp,
+                'type' => $type,
+                'site_id' => $site_id->id,
+                'longitude' => '106.798818',
+                'latitude' => '-6.263122',
+                'event_id' => 3
             ]);
 
             return redirect()->route('attendances')->with('success', 'attendance created successfully');
@@ -407,7 +407,7 @@ class AttendanceController extends Controller
         // dd($attendance);
         $attendance = Attendance::find($id);
         $validator = $request->validate([
-            'timestamp'  => 'required',
+            'timestamp' => 'required',
         ]);
 
         $config_masuk = ConfigAttendance::find(1);
@@ -450,5 +450,25 @@ class AttendanceController extends Controller
             //throw $th;
             return back()->with('error', 'Attendance deleted failed');
         }
+    }
+
+    public function handshake(Request $request)
+    {
+        \Log::info('Handshake', $request->all());
+    }
+
+    public function test(Request $request)
+    {
+        \Log::info('Test', $request->all());
+    }
+
+    public function receiveRecords(Request $request)
+    {
+        \Log::info('Receive Records', $request->all());
+    }
+
+    public function getrequest(Request $request)
+    {
+        \Log::info('Get Request', $request->all());
     }
 }

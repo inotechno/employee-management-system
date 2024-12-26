@@ -39,7 +39,7 @@ class PaidLeaveController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $paid_leave = PaidLeave::with('supervisor')->where('employee_id', auth()->user()->employee->id);
+            $paid_leave = PaidLeave::with('supervisor')->where('employee_id', auth()->user()->employee->id)->orderBy('created_at', 'DESC');
             // dd($paid_leave->get()->toArray());
             return DataTables::eloquent($paid_leave)
                 ->addIndexColumn()
