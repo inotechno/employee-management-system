@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AbsentController;
+use App\Http\Controllers\IClockController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Auth\LoginController;
@@ -140,11 +141,11 @@ Route::put('/importdata/upload', [ImportEmployeeController::class, 'process_uplo
 Route::get('/attendances/sync', [AttendanceController::class, 'sync'])->name('attendances.sync');
 Route::get('/employees/sync', [EmployeeController::class, 'sync'])->name('employees.sync');
 
-Route::get('/iclock/cdata', [AttendanceController::class, 'handshake']);
-Route::post('/iclock/cdata', [AttendanceController::class, 'receiveRecords']);
+Route::get('/iclock/cdata', [IClockController::class, 'handshake']);
+Route::post('/iclock/cdata', [IClockController::class, 'receiveRecords']);
 
-Route::get('/iclock/test', [AttendanceController::class, 'test']);
-Route::get('/iclock/getrequest', [AttendanceController::class, 'getrequest']);
+Route::get('/iclock/test', [IClockController::class, 'test']);
+Route::get('/iclock/getrequest', [IClockController::class, 'getrequest']);
 
 // daily Report Route
 Route::get('/daily-report', [DirectorDailyReportController::class, 'index'])->name('daily_reports.all');

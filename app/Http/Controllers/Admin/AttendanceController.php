@@ -87,10 +87,10 @@ class AttendanceController extends Controller
 
                     $config_masuk = ConfigAttendance::find(1);
                     // $config_pulang = ConfigAttendance::find(2);
-    
+
                     $in = Attendance::whereTime('timestamp', '<=', $config_masuk->end)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->orderBy('timestamp', 'ASC')->first();
                     // $out = Attendance::whereTime('timestamp', '>=', $config_pulang->start)->whereDate('timestamp', $row->date)->where('employee_id', $row->employee_id)->latest()->first();
-    
+
                     if ($in) {
                         $span = '';
                         $color = "bg-success";
@@ -454,7 +454,23 @@ class AttendanceController extends Controller
 
     public function handshake(Request $request)
     {
+        $r = "GET OPTION FROM: {$request->input('SN')}\r\n" .
+            "Stamp=9999\r\n" .
+            "OpStamp=" . time() . "\r\n" .
+            "ErrorDelay=60\r\n" .
+            "Delay=30\r\n" .
+            "ResLogDay=18250\r\n" .
+            "ResLogDelCount=10000\r\n" .
+            "ResLogCount=50000\r\n" .
+            "TransTimes=00:00;14:05\r\n" .
+            "TransInterval=1\r\n" .
+            "TransFlag=1111000000\r\n" .
+            //  "TimeZone=7\r\n" .
+            "Realtime=1\r\n" .
+            "Encrypt=0";
+
         \Log::info('Handshake', $request->all());
+        return $r;
     }
 
     public function test(Request $request)
@@ -464,11 +480,52 @@ class AttendanceController extends Controller
 
     public function receiveRecords(Request $request)
     {
-        \Log::info('Receive Records', $request->all());
+        $content['url'] = json_encode($request->all());
+        $content['data'] = $request->getContent();
+        ;
+        \Log::info('Content', $content);
+        // try {
+        //     // $post_content = $request->getContent();
+        //     //$arr = explode("\n", $post_content);
+        //     $arr = preg_split('/\\r\\n|\\r|,|\\n/', $request->getContent());
+        //     //$tot = count($arr);
+        //     $tot = 0;
+        //     //operation log
+        //     if ($request->input('table') == "OPERLOG") {
+        //         // $tot = count($arr) - 1;
+        //         foreach ($arr as $rey) {
+        //             if (isset($rey)) {
+        //                 $tot++;
+        //             }
+        //         }
+
+        //         \Log::info('Receive Records', $request->all());
+        //         return "OK: " . $tot;
+        //     }
+
+        //     //attendance
+        //     foreach ($arr as $rey) {
+        //         // $data = preg_split('/\s+/', trim($rey));
+        //         if (empty($rey)) {
+        //             continue;
+        //         }
+
+        //         // $data = preg_split('/\s+/', trim($rey));
+        //         $data = explode("\t", $rey);
+        //         $tot++;
+        //     }
+
+        //     \Log::info('Receive Records', $request->all());
+        //     return "OK: " . $tot;
+        // } catch (Throwable $e) {
+        //     \Log::error('Error', $e->getMessage());
+        //     return "ERROR: " . $tot . "\n";
+        // }
     }
 
     public function getrequest(Request $request)
     {
         \Log::info('Get Request', $request->all());
+        return "OK";
     }
 }
