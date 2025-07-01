@@ -77,22 +77,21 @@ Proyek ini merupakan bagian dari portfolio pribadi saya sebagai seorang programm
 
 ## 📸 Screenshot
 ### Dashboard
-![image](https://github.com/user-attachments/assets/ecb9574c-af57-42f4-b47a-4f207c5fedc4)
+![image](https://github.com/user-attachments/assets/5a383003-de3f-4859-8d58-aff7eb6dfbf9)
 
 ### Attendance
-![image](https://github.com/user-attachments/assets/6c8845be-4711-4df0-8c7e-2b22f6e0fecd)
+![image](https://github.com/user-attachments/assets/77b258dc-ae91-4510-9bfd-0cc518b2c12b)
 
 ### Attendance TAG
-![image](https://github.com/user-attachments/assets/3bbe5132-4af3-4104-a909-c03b72497eb4)
+![image](https://github.com/user-attachments/assets/83862fe5-deea-424c-b6cd-43733873832f)
 
 ### Attendance QRCode
-![image](https://github.com/user-attachments/assets/9c27a9b7-a765-4b88-a38e-3bd2d66fff46)
-
+![image](https://github.com/user-attachments/assets/7553ecdc-b1d3-4a7d-81a1-1d308b2b17a9)
 
 ---
 
 ## 📬 Kontak
 
-- Email: yourname@example.com
+- Email: 2ahmadfatoni0@gmail.com
 - LinkedIn: [linkedin.com/in/2ahmadfatoni0](https://linkedin.com/in/2ahmadfatoni0)
 - Website: [inotechno.my.id](https://inotechno.my.id)
