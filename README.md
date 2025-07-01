@@ -1,64 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 🧑‍💼 Employee Management System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem manajemen karyawan yang saya kembangkan untuk mendukung otomatisasi dan digitalisasi proses administrasi HR dan manajemen kehadiran di perusahaan. Proyek ini dibangun menggunakan **Laravel 8**, **MySQL**, dan **Google Cloud Storage** dengan integrasi perangkat keras seperti **Fingerprint ADMS** dan **HikVision Access Control**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur Unggulan
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. ✅ **Attendance System**
+   - Validasi kehadiran oleh HRD
+   - Support QR Code, Fingerprint Solution (ADMS), dan Face Recognition (HikVision)
+   
+2. 📝 **Daily Report**
+   - Laporan harian yang dapat di-*CC* ke atasan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. 📆 **Pengajuan Cuti**
+   - Otomatis melewati hari libur (weekend/nasional)
 
-## Learning Laravel
+4. 🕒 **Pengajuan Ijin**
+   - Permintaan izin dengan alur persetujuan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. 📢 **Announcement**
+   - Pengumuman internal kepada seluruh atau sebagian karyawan
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+6. 📊 **Master Data**
+   - Posisi
+   - Karyawan & Pengguna
+   - Mesin & Lokasi kerja (*site*)
 
-## Laravel Sponsors
+7. 💰 **Pengajuan Keuangan**
+   - Reimbursement dan pengajuan lainnya
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+8. 📍 **Visit System**
+   - Pencatatan kunjungan dengan metode Tag atau QR Code
 
-### Premium Partners
+9. 📈 **Report Attendance**
+   - Berdasarkan karyawan, semua karyawan, atau rentang tanggal
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+10. 📄 **Report Daily Report**
+    - Laporan per individu, semua karyawan, atau berdasarkan periode
 
-## Contributing
+11. 🔁 **Reset Cuti Otomatis**
+    - Jumlah cuti akan direset otomatis menjadi 12 ketika tanggal join tercapai
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+12. ✉️ **Notifikasi Email**
+    - Setiap pengajuan dan persetujuan dikirimkan via email
 
-## Code of Conduct
+13. 🖐️ **Integrasi Fingerprint ADMS**
+    - Koneksi ke perangkat fingerprint untuk mengambil data kehadiran secara real-time
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+14. 🎥 **HTTP Listener HikVision**
+    - Mendengarkan event face recognition dari perangkat HikVision
 
-## Security Vulnerabilities
+15. ☁️ **Google Cloud Storage Integration**
+    - Menyimpan file secara terpusat di cloud
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🧰 Teknologi yang Digunakan
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- ⚙️ **Laravel 8** - PHP Framework
+- 🗄️ **MySQL** - Database Relasional
+- ☁️ **Google Cloud Storage (GCS)** - Cloud File Storage
+- 🧠 **ADMS** - Fingerprint Hardware Integration
+- 🎦 **HikVision** - Access Control Integration
+
+---
+
+## 🚀 Tujuan Proyek
+
+Proyek ini merupakan bagian dari portfolio pribadi saya sebagai seorang programmer, dengan fokus pada:
+- Efisiensi proses HR melalui digitalisasi
+- Integrasi perangkat keras dengan perangkat lunak modern
+- Penggunaan cloud untuk skalabilitas dan keamanan data
+
+---
+
+## 📸 Screenshot
+### Dashboard
+![image](https://github.com/user-attachments/assets/ecb9574c-af57-42f4-b47a-4f207c5fedc4)
+
+### Attendance
+![image](https://github.com/user-attachments/assets/6c8845be-4711-4df0-8c7e-2b22f6e0fecd)
+
+### Attendance TAG
+![image](https://github.com/user-attachments/assets/3bbe5132-4af3-4104-a909-c03b72497eb4)
+
+### Attendance QRCode
+![image](https://github.com/user-attachments/assets/9c27a9b7-a765-4b88-a38e-3bd2d66fff46)
+
+
+---
+
+## 📬 Kontak
+
+- Email: yourname@example.com
+- LinkedIn: [linkedin.com/in/2ahmadfatoni0](https://linkedin.com/in/2ahmadfatoni0)
+- Website: [inotechno.my.id](https://inotechno.my.id)
